@@ -19,5 +19,11 @@ model Session {
   data         String
   expiresAt    DateTime @map("expires_at")
 
-  @@map("sessions") // This maps the table name to "sessions"
+  @@map("sessions") 
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
 }
