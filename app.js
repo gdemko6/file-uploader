@@ -8,6 +8,8 @@ const app = express();
 const prisma = new PrismaClient();
 const signupRouter = require("./routes/signupRoutes.js");
 
+app.set("view engine", "ejs");
+
 app.use(express.urlencoded({extended: true}));
 
 app.use(
