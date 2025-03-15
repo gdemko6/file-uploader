@@ -2,11 +2,12 @@ const express = require("express");
 const session = require("express-session");
 require("dotenv").config();
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const passport = require("passport");
+const passport = require("./auth");
 const { PrismaClient } = require("@prisma/client");
 const app = express();
 const prisma = new PrismaClient();
 const signupRouter = require("./routes/signupRoutes.js");
+const loginRouter = require("./routes/loginRoutes.js");
 
 app.set("view engine", "ejs");
 
@@ -28,6 +29,7 @@ app.use(
   app.use(passport.session());
 
 app.use("/signup", signupRouter);
+app.use("/login", loginRouter);
 
 app.listen(3000, () => {
     console.log("listening on port 3000");
