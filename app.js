@@ -8,6 +8,7 @@ const app = express();
 const prisma = new PrismaClient();
 const signupRouter = require("./routes/signupRoutes.js");
 const loginRouter = require("./routes/loginRoutes.js");
+const uploadRouter = require("./routes/uploadRoutes.js");
 
 app.set("view engine", "ejs");
 
@@ -30,6 +31,7 @@ app.use(
 
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
+app.use("/upload", uploadRouter);
 
 app.listen(3000, () => {
     console.log("listening on port 3000");
