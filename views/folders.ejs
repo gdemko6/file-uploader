@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Folders</title>
+        <script>
+            function toggleForm() {
+                var form = document.getElementById("newFolderForm");
+                form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Your Folders</h2>
+    
+        <!-- Button to show/hide the form -->
+        <button onclick="toggleForm()">New Folder</button>
+    
+        <!-- Hidden form to create a new folder -->
+        <form id="newFolderForm" action="/folders" method="POST" style="display: none;">
+            <input type="text" name="name" placeholder="Folder Name" required>
+            <button type="submit">Create</button>
+        </form>
+    
+        <% if (folders.length > 0) { %>
+            <ul>
+                <% folders.forEach(folder => { %>
+                    <li>
+                        <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>You have no folders yet.</p>
+        <% } %>
+    
+    </body>
+</html>
