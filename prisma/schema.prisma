@@ -22,8 +22,31 @@ model Session {
   @@map("sessions") 
 }
 
-model Users {
+model User {  
   id       String  @id @default(uuid())
   email    String  @unique
   password String
+  folders  Folder[]
+  files    File[]
 }
+
+model Folder {
+  id        String  @id @default(uuid())
+  name      String
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade) 
+  files     File[]  
+  createdAt DateTime @default(now())
+}
+
+model File {
+  id        String  @id @default(uuid())
+  filename  String
+  path      String
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade) 
+  folderId  String  
+  folder    Folder? @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  uploadedAt DateTime @default(now())
+}
+
