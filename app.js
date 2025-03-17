@@ -33,7 +33,7 @@ app.use(
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/upload", uploadRouter);
-app.use("/folder", folderRouter);
+app.use("/folders", folderRouter);
 
 app.listen(3000, () => {
     console.log("listening on port 3000");
