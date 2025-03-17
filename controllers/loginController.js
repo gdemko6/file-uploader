@@ -16,7 +16,7 @@ async function loginUser(req, res, next) {
             if (err) {
                 return next(err);
             }
-            return res.redirect("/"); 
+            return res.redirect("/folders"); 
         });
     })(req, res, next);
 }
