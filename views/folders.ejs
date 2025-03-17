@@ -6,6 +6,7 @@
         <script>
             function toggleForm() {
                 var form = document.getElementById("newFolderForm");
+                //set display from none to block or vice versa
                 form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
             }
         </script>
@@ -22,6 +23,7 @@
             <button type="submit">Create</button>
         </form>
     
+        <!-- Display Folders -->
         <% if (folders.length > 0) { %>
             <ul>
                 <% folders.forEach(folder => { %>
