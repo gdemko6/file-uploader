@@ -40,7 +40,6 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
             where: { id: req.params.id }
         });
 
-        //user cant delete a folder that isnt theirs
         if (!folder || folder.userId !== req.user.id) {
             return res.status(403).json({ message: "Forbidden: You cannot delete this folder" });
         }
@@ -48,14 +47,12 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
         await prisma.file.deleteMany({ where: { folderId: req.params.id } });
         await prisma.folder.delete({ where: { id: req.params.id } });
 
-        const folders = await prisma.folder.findMany({
-            where: { userId: req.user.id },
-        });
-        res.render("folders", { folders: folders });
+        res.json({ message: "Folder deleted successfully" }); // Server response
     } catch (err) {
         res.status(500).json({ message: "Error deleting folder" });
     }
 });
+
 
 
 router.get("/:id")
