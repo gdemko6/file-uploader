@@ -37,7 +37,7 @@
             <script>
                 async function deleteFolder(folderId) {
                     if (confirm("Are you sure you want to delete this folder?")) {
-                        const response = await fetch(`/folders`, { method: "DELETE" });
+                        const response = await fetch(`/folders{}`, { method: "DELETE" });
                         if (response.ok) {
                             location.reload(); // Refresh the page
                         } else {

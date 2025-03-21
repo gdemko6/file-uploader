@@ -55,7 +55,30 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
 
 
 
-router.get("/:id")
+router.get("/:id", ensureAuthenticated, async (req, res) => {
+    try {
+        const folderId = req.params.id;
+
+        //Need folder data as well as the files contained within
+        const folder = await prisma.folder.findUnique({
+            where: { id: folderId },
+            include: { files: true },
+        });
+
+        if (!folder || folder.userId !== req.user.id) {
+            return res.status(403).send("You do not have access to this folder.");
+        }
+
+        res.render("upload", {
+            folderId: folder.id,
+            folderName: folder.name,
+            files: folder.files,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server error loading folder.");
+    }
+})
 
 router.post("/:id")
 

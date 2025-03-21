@@ -1,9 +1,27 @@
-<html>
+<html lang="en">
+
     <body>
-        <h2>Upload File</h2>
+        <h2>Upload to Folder: <%= folderId %></h2>
+
+        <!-- Upload form -->
         <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file-upload">
-            <button>Submit</button>
+            <input type="hidden" name="folderId" value="<%= folderId %>">
+            <input type="file" name="file-upload" required>
+            <button type="submit">Upload</button>
         </form>
+
+        <% if (files.length > 0) { %>
+            <h3>Current Files</h3>
+            <ul>
+                <% files.forEach(file => { %>
+                    <li>
+                        <a href="/folders/<%= folderId %>/<%= file.id %>"><%= file.filename %></a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No files in this folder yet.</p>
+        <% } %>
     </body>
+
 </html>
