@@ -80,7 +80,45 @@ router.get("/:id", ensureAuthenticated, async (req, res) => {
     }
 })
 
-router.post("/:id")
+router.delete("/:id/:fileId", ensureAuthenticated, async (req, res) => {
+    try {
+        const file = await prisma.file.findUnique({
+            where: { id: req.params.fileId }
+        });
+
+        if (!file || file.userId !== req.user.id || file.folderId !== req.params.folderId) {
+            return res.status(403).send("Unauthorized");
+        }
+
+        await prisma.file.delete({
+            where: { id: file.id }
+        });
+
+        res.redirect(`/folders/${req.params.id}`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error deleting file");
+    }
+});
+
+router.get("/:id/:fileId/download", ensureAuthenticated, async (req, res) => {
+    try {
+        const file = await prisma.file.findUnique({
+            where: { id: req.params.fileId }
+        });
+
+        if (!file || file.userId !== req.user.id || file.folderId !== req.params.id) {
+            return res.status(403).send("Unauthorized");
+        }
+
+        res.download(file.path, file.filename);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error downloading file");
+    }
+});
+
+
 
 
 //make sure user is authenticated before allowing access to the folders
