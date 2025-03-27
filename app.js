@@ -10,9 +10,6 @@ const signupRouter = require("./routes/signupRoutes.js");
 const loginRouter = require("./routes/loginRoutes.js");
 const uploadRouter = require("./routes/uploadRoutes.js");
 const folderRouter = require("./routes/folderRoutes.js");
-const methodOverride = require("method-override");
-
-app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
 

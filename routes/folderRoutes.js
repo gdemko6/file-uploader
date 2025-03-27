@@ -86,7 +86,7 @@ router.delete("/:id/:fileId", ensureAuthenticated, async (req, res) => {
             where: { id: req.params.fileId }
         });
 
-        if (!file || file.userId !== req.user.id || file.folderId !== req.params.folderId) {
+        if (!file || file.userId !== req.user.id || file.folderId !== req.params.id) {
             return res.status(403).send("Unauthorized");
         }
 
@@ -94,12 +94,13 @@ router.delete("/:id/:fileId", ensureAuthenticated, async (req, res) => {
             where: { id: file.id }
         });
 
-        res.redirect(`/folders/${req.params.id}`);
+        res.status(200).send("File deleted successfully");
     } catch (err) {
         console.error(err);
         res.status(500).send("Error deleting file");
     }
 });
+
 
 router.get("/:id/:fileId/download", ensureAuthenticated, async (req, res) => {
     try {
