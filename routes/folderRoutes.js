@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const fs = require("fs").promises;
 
 router.get("/", ensureAuthenticated, async (req, res) => {
   try {
@@ -89,14 +90,23 @@ router.delete("/:id/:fileId", ensureAuthenticated, async (req, res) => {
       where: { id: req.params.fileId },
     });
 
-    if (
-      !file ||
-      file.userId !== req.user.id ||
-      file.folderId !== req.params.id
-    ) {
+    if (!file) {
+      return res.status(404).send("File not found");
+    }
+
+    if (file.userId !== req.user.id || file.folderId !== req.params.id) {
       return res.status(403).send("Unauthorized");
     }
 
+    // Delete the actual file that is stored on disk
+    try {
+      await fs.unlink(file.path);
+    } catch (err) {
+      console.error("Failed to delete file from disk:", err);
+      return res.status(500).send("Failed to delete file from disk");
+    }
+
+    // Delete the file metadata in the database
     await prisma.file.delete({
       where: { id: file.id },
     });
