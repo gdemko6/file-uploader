@@ -110,15 +110,17 @@ router.delete("/:id/:fileId", ensureAuthenticated, async (req, res) => {
 
 router.get("/:id/:fileId/download", ensureAuthenticated, async (req, res) => {
   try {
+    // Gather the metadata stored in our "file" table to retrive the actual file
+    // from the uploads folder using that path
     const file = await prisma.file.findUnique({
       where: { id: req.params.fileId },
     });
 
-    if (
-      !file ||
-      file.userId !== req.user.id ||
-      file.folderId !== req.params.id
-    ) {
+    if (!file) {
+      return res.status(404).send("File not found");
+    }
+
+    if (file.userId !== req.user.id || file.folderId !== req.params.id) {
       return res.status(403).send("Unauthorized");
     }
 
