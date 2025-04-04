@@ -1,8 +1,6 @@
 const passport = require("passport");
 
-function getLogin(req, res) {
-    res.render("login");
-}
+
 
 async function loginUser(req, res, next) {
     passport.authenticate("local", (err, user, info) => {
@@ -16,9 +14,9 @@ async function loginUser(req, res, next) {
             if (err) {
                 return next(err);
             }
-            return res.redirect("/folders"); 
+            return res.status(200).json({ message: "Login successful", user: { id: user.id, email: user.email } });
         });
     })(req, res, next);
 }
 
-module.exports = { getLogin, loginUser };
+module.exports = { loginUser };
