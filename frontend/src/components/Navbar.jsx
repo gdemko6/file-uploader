@@ -15,6 +15,7 @@ export default function Navbar() {
       <div className="space-x-6 font-medium text-gray-700">
         <NavLink
           to="/folders"
+          // Add base style, if not active, do not apply active style
           className={({ isActive }) =>
             `${baseStyle} ${isActive ? activeStyle : ""}`
           }
