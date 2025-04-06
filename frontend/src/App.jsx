@@ -4,6 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import FoldersPage from "./pages/FoldersPage";
 import FolderDetailPage from "./pages/FolderDetailPage";
@@ -11,6 +12,7 @@ import FolderDetailPage from "./pages/FolderDetailPage";
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/folders" element={<FoldersPage />} />
