@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import FoldersPage from "./pages/FoldersPage";
 import FolderDetailPage from "./pages/FolderDetailPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/folders/:folderId" element={<FolderDetailPage />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );
