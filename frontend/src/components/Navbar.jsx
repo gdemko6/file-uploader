@@ -5,14 +5,14 @@ export default function Navbar() {
   const activeStyle = "underline underline-offset-6 decoration-blue-300 text-lg";
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-white shadow">
+    <nav className="flex items-center justify-between px-6 lg:px-16 py-4 bg-white shadow ">
       {/* Logo */}
-      <NavLink to="/" className="text-2xl font-bold text-blue-600">
+      <NavLink to="/" className="text-2xl lg:text-3xl font-bold text-blue-600">
         FileKeep
       </NavLink>
 
       {/* Nav Links */}
-      <div className="space-x-6 font-medium text-gray-700">
+      <div className="space-x-6 font-medium lg:text-xl text-gray-700">
         <NavLink
           to="/folders"
           // Add base style, if not active, do not apply active style
