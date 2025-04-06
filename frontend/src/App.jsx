@@ -12,12 +12,16 @@ import FolderDetailPage from "./pages/FolderDetailPage";
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/folders" element={<FoldersPage />} />
-        <Route path="/folders/:folderId" element={<FolderDetailPage />} />
-      </Routes>
+      <div className="flex flex-col min-h-screen items">
+        <Navbar />
+        <main className="flex flex-grow justify-center">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/folders" element={<FoldersPage />} />
+            <Route path="/folders/:folderId" element={<FolderDetailPage />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   );
 }
