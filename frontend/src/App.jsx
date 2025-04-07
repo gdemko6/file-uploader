@@ -6,6 +6,8 @@ import {
 
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
 import FoldersPage from "./pages/FoldersPage";
 import FolderDetailPage from "./pages/FolderDetailPage";
 import Footer from "./components/Footer";
@@ -20,6 +22,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/folders" element={<FoldersPage />} />
             <Route path="/folders/:folderId" element={<FolderDetailPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage/>} />
           </Routes>
         </main>
         <Footer />
