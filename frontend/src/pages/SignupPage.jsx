@@ -7,9 +7,12 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const res = await fetch("http://localhost:3000/signup", {
@@ -29,6 +32,8 @@ export default function SignupPage() {
       }
     } catch (err) {
       setErrorMsg("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -65,8 +70,13 @@ export default function SignupPage() {
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+          disabled={isLoading}
         >
-          Create Account
+          {isLoading ? (
+          <span className="animate-spin border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+        ) : (
+      "Create Account"
+                )}
         </button>
       </form>
     </div>
