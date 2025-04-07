@@ -5,7 +5,10 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const passport = require("./auth");
 const { PrismaClient } = require("@prisma/client");
 const cors = require("cors");
-
+const signupRoutes = require("./routes/signupRoutes");
+const loginRoutes = require("./routes/loginRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
+const folderRoutes = require("./routes/folderRoutes");
 const app = express();
 const prisma = new PrismaClient();
 
@@ -32,10 +35,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/signup", signupRouter);
-app.use("/login", loginRouter);
-app.use("/upload", uploadRouter);
-app.use("/folders", folderRouter);
+app.use("/signup", signupRoutes);
+app.use("/login", loginRoutes);
+app.use("/upload", uploadRoutes);
+app.use("/folders", folderRoutes);
 
 
 app.get("/", (req, res) => {
