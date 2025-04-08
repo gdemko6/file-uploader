@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 export default function HomePage() {
   return (
     <div className="flex flex-col items-center justify-center flex-grow mb-20">
-
       {/* Logo / Title */}
-      <h1 className="text-5xl lg:text-8xl font-bold mb-8 text-blue-600">FileKeep</h1>
+      <h1 className="text-5xl lg:text-8xl font-bold mb-8 text-blue-600">
+        FileKeep
+      </h1>
 
       <p className="text-gray-500 mb-8 text-center max-w-md italic lg:text-xl">
         A simple, secure way to organize your folders and upload your files.
       </p>
-
 
       {/* Buttons */}
       <div className="flex space-x-6">

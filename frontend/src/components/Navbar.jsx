@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const baseStyle = "hover:text-blue-500";
-  const activeStyle = "underline underline-offset-6 decoration-blue-300 text-lg";
+  const activeStyle =
+    "underline underline-offset-6 decoration-blue-300 text-lg";
 
   return (
     <nav className="flex items-center justify-between px-6 lg:px-16 py-4 bg-white shadow ">
