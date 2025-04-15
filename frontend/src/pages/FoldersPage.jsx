@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Folder from "../components/Folder";
 
 export default function FoldersPage() {
@@ -38,7 +39,11 @@ export default function FoldersPage() {
 
       <div className="grid grid-cols-2 justify-between w-full gap-10 px-6 pt-10 pb-30 min-h-200">
         {folders &&
-          folders.map((folder) => <Folder key={folder.id} folder={folder} />)}
+          folders.map((folder) => (
+            <Link to={`/folders/${folder.id}`}>
+              <Folder key={folder.id} folder={folder} />
+            </Link>
+          ))}
       </div>
     </div>
   );
