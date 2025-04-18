@@ -11,6 +11,8 @@ export default function FolderDetailPage() {
   const [fileUpload, setFileUpload] = useState(null);
 
   useEffect(() => {
+    // Retrieve all folders and files already stored in the database
+    // for this user
     const fetchFolder = async () => {
       try {
         const res = await fetch(`http://localhost:3000/folders/${folderId}`, {
@@ -21,6 +23,7 @@ export default function FolderDetailPage() {
           credentials: "include",
         });
 
+        // Check authentication
         if (res.status === 401) {
           navigate("/login");
           return;
@@ -35,10 +38,13 @@ export default function FolderDetailPage() {
     };
 
     fetchFolder();
-  }, [folderId, navigate]);
+  }, [folderId]);
 
   const handleUpload = async (e) => {
+    // Dont reload page
     e.preventDefault();
+
+    // Dont attempt upload if no file has been selected
     if (!fileUpload) return;
 
     const formData = new FormData();
@@ -58,6 +64,8 @@ export default function FolderDetailPage() {
       }
 
       const data = await res.json();
+
+      // All files + the new file
       setFiles((prev) => [...prev, data.file]);
       setFileUpload(null);
     } catch (err) {
@@ -80,6 +88,7 @@ export default function FolderDetailPage() {
         return;
       }
 
+      // Returns all files except the one that was deleted
       if (res.ok) {
         setFiles((prev) => prev.filter((f) => f.id !== fileId));
       }
