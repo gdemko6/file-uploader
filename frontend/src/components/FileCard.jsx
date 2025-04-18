@@ -13,7 +13,7 @@ export default function FileCard({ file, folderId, onDelete }) {
         </a>
         <button
           onClick={() => onDelete(file.id)}
-          className="text-red-500 hover:underline"
+          className="text-red-500 cursor-pointer hover:underline"
         >
           Delete
         </button>
