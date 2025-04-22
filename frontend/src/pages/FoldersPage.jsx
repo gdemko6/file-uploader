@@ -71,7 +71,7 @@ export default function FoldersPage() {
   const handleDeleteFolder = async (folderIdToDelete) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/folders${folderIdToDelete}`,
+        `http://localhost:3000/folders/${folderIdToDelete}`,
         {
           method: "DELETE",
           credentials: "include",
