@@ -83,8 +83,6 @@ export default function FoldersPage() {
         return;
       }
 
-      const data = await res.json();
-
       setFolders((prev) =>
         prev.filter((folder) => folder.id !== folderIdToDelete)
       );
