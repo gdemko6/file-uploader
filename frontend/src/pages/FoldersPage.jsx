@@ -68,6 +68,31 @@ export default function FoldersPage() {
     }
   };
 
+  const handleDeleteFolder = async (folderIdToDelete) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/folders${folderIdToDelete}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+
+      if (res.status === 401) {
+        navigate("/login");
+        return;
+      }
+
+      const data = await res.json();
+
+      setFolders((prev) =>
+        prev.filter((folder) => folder.id !== folderIdToDelete)
+      );
+    } catch (err) {
+      console.error("Error deleting folder:", err.message);
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="flex justify-between items-center px-6 pt-5">
@@ -118,9 +143,11 @@ export default function FoldersPage() {
       <div className="grid grid-cols-2 justify-between w-full gap-10 px-6 pt-10 pb-30">
         {folders &&
           folders.map((folder) => (
-            <Link to={`/folders/${folder.id}`}>
-              <Folder key={folder.id} folder={folder} />
-            </Link>
+            <Folder
+              key={folder.id}
+              folder={folder}
+              deleteFolder={handleDeleteFolder}
+            />
           ))}
       </div>
     </div>
