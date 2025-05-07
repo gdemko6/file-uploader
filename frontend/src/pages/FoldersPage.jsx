@@ -143,7 +143,7 @@ export default function FoldersPage() {
         </div>
       )}
 
-      <div className="grid grid-cols-2 justify-between w-full gap-10 px-6 pt-10 pb-30">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-between w-full gap-10 px-6 pt-10 pb-30">
         {folders &&
           folders.map((folder) => (
             <Folder
