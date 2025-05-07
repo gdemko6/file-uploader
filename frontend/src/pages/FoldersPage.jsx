@@ -111,12 +111,17 @@ export default function FoldersPage() {
             <form onSubmit={handleCreateFolder} className="space-y-4">
               <input
                 type="text"
+                maxLength={20}
                 value={newFolderName}
                 onChange={(e) => setNewFolderName(e.target.value)}
                 className="w-full border px-4 py-2 rounded"
                 placeholder="Enter folder name"
                 required
               />
+
+              <p className="text-sm text-gray-500 mt-1">
+                {newFolderName.length} / 20 characters
+              </p>
 
               <div className="flex justify-end gap-3">
                 <button
