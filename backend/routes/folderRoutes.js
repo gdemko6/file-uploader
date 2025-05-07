@@ -28,6 +28,13 @@ router.post("/", ensureAuthenticated, async (req, res) => {
   try {
     const { name } = req.body;
 
+    // Limit folder names to be 20 characters or less
+    if (!name || name.length > 20) {
+      return res
+        .status(400)
+        .json({ message: "Folder name must be 20 characters or fewer" });
+    }
+
     const folder = await prisma.folder.create({
       data: {
         name,
@@ -54,7 +61,9 @@ router.delete("/:id", ensureAuthenticated, async (req, res) => {
     }
 
     if (folder.userId !== req.user.id) {
-      return res.status(403).json({ message: "Forbidden: You cannot delete this folder" });
+      return res
+        .status(403)
+        .json({ message: "Forbidden: You cannot delete this folder" });
     }
 
     await prisma.file.deleteMany({ where: { folderId: req.params.id } });
@@ -112,7 +121,9 @@ router.delete("/:id/:fileId", ensureAuthenticated, async (req, res) => {
       await fs.unlink(file.path);
     } catch (err) {
       console.error("Failed to delete file from disk:", err);
-      return res.status(500).json({ message: "Failed to delete file from disk" });
+      return res
+        .status(500)
+        .json({ message: "Failed to delete file from disk" });
     }
 
     // Delete the file metadata in the database
@@ -127,7 +138,7 @@ router.delete("/:id/:fileId", ensureAuthenticated, async (req, res) => {
   }
 });
 
-// GET a file download 
+// GET a file download
 router.get("/:id/:fileId/download", ensureAuthenticated, async (req, res) => {
   try {
     const file = await prisma.file.findUnique({
