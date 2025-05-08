@@ -2,8 +2,10 @@ import React from "react";
 
 export default function FileCard({ file, folderId, onDelete }) {
   return (
-    <li className="flex justify-between items-center border border-blue-600 p-4 rounded shadow-sm bg-white">
-      <span className="text-gray-800 font-bold mr-5">{file.filename}</span>
+    <li className="flex justify-between items-center border border-blue-200 py-1 px-1.5 rounded shadow-sm bg-white">
+      <span className="text-gray-800 font-bold italic mr-5 pl-1">
+        {file.filename}
+      </span>
       <div className="space-x-4">
         {/* Download file */}
         <a

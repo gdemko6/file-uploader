@@ -99,40 +99,40 @@ export default function FolderDetailPage() {
 
   return (
     <div className="p-6 mx-auto w-full">
-      <h1 className="text-3xl text-center font-bold text-gray-800 mb-6">
-        Folder: {folder.name}
-      </h1>
-
-      <form
-        onSubmit={handleUpload}
-        className="mb-8 flex items-center justify-center gap-4"
-      >
-        <label className="px-4 py-2 rounded cursor-pointer border border-black">
-          <span className="ml-1 mr-4 italic text-md text-gray-600">
-            {fileUpload ? fileUpload.name : "No file chosen"}
-          </span>
-          <span className="bg-gray-200 rounded px-2 py-1 text-sm">
-            Choose File
-          </span>
-          <input
-            type="file"
-            onChange={(e) => setFileUpload(e.target.files[0])}
-            className="hidden"
-          />
-        </label>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      <div className="flex justify-center text-nowrap">
+        <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-center font-bold text-gray-800 mb-6 mx-1 sm:mx-4 lg:mx-10">
+          Folder: {folder.name}
+        </h1>
+        <form
+          onSubmit={handleUpload}
+          className="mb-8 flex items-center justify-center gap-4 mx-1 sm:mx-4 lg:mx-10"
         >
-          Upload
-        </button>
-      </form>
+          <label className="px-1 sm:px-4 py-1 md:py-2 rounded cursor-pointer border border-black">
+            <span className="ml-1 mr-4 italic text-sm md:text-md text-gray-600">
+              {fileUpload ? fileUpload.name : "No file chosen"}
+            </span>
+            <span className="bg-gray-200 rounded px-1 sm:px-2 py-.5 md:py-1 text-sm">
+              Choose File
+            </span>
+            <input
+              type="file"
+              onChange={(e) => setFileUpload(e.target.files[0])}
+              className="hidden"
+            />
+          </label>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-1 sm:px-4 py-1 md:py-2 rounded hover:bg-blue-600"
+          >
+            Upload
+          </button>
+        </form>
+      </div>
 
       {files.length === 0 ? (
         <p className="text-gray-500">This folder has no files yet.</p>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-1 sm:mx-15 md:grid-cols-1 md:mx-10 lg:grid-cols-2 xl:grid-cols-3 xl:mx-6 gap-y-6 gap-x-15">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-6">
           {files.map((file) => (
             <FileCard
               key={file.id}
