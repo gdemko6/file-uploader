@@ -17,7 +17,12 @@ export default function FileCard({ file, folderId, onDelete }) {
 
         {/* Delete function is made and passed as a prop from FolderDetailPage */}
         <button
-          onClick={() => onDelete(file.id)}
+          onClick={() => {
+            const confirmed = window.confirm(
+              "Are you sure you want to delete this file?"
+            );
+            confirmed ? onDelete(file.id) : null;
+          }}
           className="text-red-500 cursor-pointer hover:underline"
         >
           Delete

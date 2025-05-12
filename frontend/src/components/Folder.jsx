@@ -1,5 +1,5 @@
 import { FaFolder } from "react-icons/fa";
-import { Trash2 } from "lucide-react";
+import { Trash2, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Folder({ folder, deleteFolder }) {
@@ -21,7 +21,10 @@ export default function Folder({ folder, deleteFolder }) {
           className="w-5 h-5 mr-5 ml-auto text-red-500 hover:text-red-700"
           onClick={(e) => {
             e.stopPropagation();
-            deleteFolder(folder.id);
+            const confirmed = window.confirm(
+              `Are you sure you want to delete "${folder.name}"?`
+            );
+            confirmed ? deleteFolder(folder.id) : null;
           }}
         />
       </div>
