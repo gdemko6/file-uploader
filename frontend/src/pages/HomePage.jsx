@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function HomePage() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/me", {
+      credentials: "include",
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => setUser(data?.user || null));
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center flex-grow mb-20">
       {/* Logo / Title */}
@@ -13,20 +24,29 @@ export default function HomePage() {
       </p>
 
       {/* Buttons */}
-      <div className="flex space-x-6">
+      {user ? (
         <Link
-          to="/login"
+          to="/folders"
           className="px-6 py-3 rounded-full bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
         >
-          Log In
+          View Folders
         </Link>
-        <Link
-          to="/signup"
-          className="px-6 py-3 rounded-full bg-gray-200 text-gray-800 font-semibold hover:bg-gray-300 transition"
-        >
-          Sign Up
-        </Link>
-      </div>
+      ) : (
+        <div className="flex space-x-6">
+          <Link
+            to="/login"
+            className="px-6 py-3 rounded-full bg-blue-500 text-white font-semibold hover:bg-blue-600 transition"
+          >
+            Log In
+          </Link>
+          <Link
+            to="/signup"
+            className="px-6 py-3 rounded-full bg-gray-200 text-gray-800 font-semibold hover:bg-gray-300 transition"
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

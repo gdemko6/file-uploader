@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
@@ -9,6 +10,16 @@ import FolderDetailPage from "./pages/FolderDetailPage";
 import Footer from "./components/Footer";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/me", {
+      credentials: "include",
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => setUser(data?.user || null));
+  }, []);
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen items">
@@ -22,7 +33,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </main>
-        <Footer />
+        <Footer user={user} />
       </div>
     </Router>
   );
