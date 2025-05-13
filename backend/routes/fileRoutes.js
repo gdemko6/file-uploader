@@ -13,7 +13,7 @@ function ensureAuthenticated(req, res, next) {
 // Get all files from a user
 router.get("/", ensureAuthenticated, async (req, res) => {
   try {
-    const files = await prisma.folder.findMany({
+    const files = await prisma.file.findMany({
       where: { userId: req.user.id },
     });
     res.status(200).json({ files });
