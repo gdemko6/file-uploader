@@ -1,11 +1,16 @@
 import React from "react";
+import formatFilename from "../utils/formatFileName";
 
 export default function FileCard({ file, onDelete }) {
   return (
     <li className="flex justify-between items-center border border-blue-200 py-1 px-1.5 rounded shadow-sm bg-white">
-      <span className="text-gray-800 font-bold italic mr-5 pl-1">
-        {file.filename}
+      <span
+        title={file.filename}
+        className="text-gray-800 font-bold italic mr-5 pl-1"
+      >
+        {formatFilename(file.filename)}
       </span>
+
       <div className="space-x-4">
         {/* Download file */}
         <a
