@@ -17,13 +17,13 @@ async function signUpUser(req, res) {
 
     res.status(201).json({
       message: "User created successfully",
-      user: { id: newUser.id, email: newUser.email }
+      user: { id: newUser.id, email: newUser.email },
     });
   } catch (error) {
-    console.error(error);
-    if (error.code === "P2002") { // Prisma unique constraint violation
+    if (error.code === "P2002") {
       res.status(400).json({ message: "Email is already in use" });
     } else {
+      console.error(error);
       res.status(500).json({ message: "Unsuccessful sign-up" });
     }
   }
