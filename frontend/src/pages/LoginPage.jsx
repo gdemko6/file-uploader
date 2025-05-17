@@ -93,6 +93,12 @@ export default function LoginPage() {
           )}
         </button>
       </form>
+      <div className="mt-2 text-sm italic">
+        Don't have an account?{" "}
+        <a href="/signup" className="underline">
+          Sign Up
+        </a>
+      </div>
     </div>
   );
 }
