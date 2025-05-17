@@ -25,6 +25,8 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
+        const userData = await res.json();
+        setUser(userData.user);
         navigate("/folders");
       } else {
         setErrorMsg(data.message || "Something went wrong");

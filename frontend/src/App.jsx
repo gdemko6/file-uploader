@@ -31,7 +31,7 @@ function App() {
             <Route path="/folders" element={<FoldersPage />} />
             <Route path="/folders/:folderId" element={<FolderDetailPage />} />
             <Route path="/files" element={<FilesPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<LoginPage setUser={setUser} />} />
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </main>
