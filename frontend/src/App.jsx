@@ -24,7 +24,7 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen items">
-        <Navbar />
+        <Navbar user={user} setUser={setUser} />
         <main className="flex flex-grow justify-center">
           <Routes>
             <Route path="/" element={<HomePage />} />

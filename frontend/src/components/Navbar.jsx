@@ -1,6 +1,20 @@
 import { NavLink } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ user, setUser }) {
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      if (res.ok) {
+        setUser(null);
+      }
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
+
   const baseStyle = "hover:text-blue-500";
   const activeStyle =
     "underline underline-offset-6 decoration-blue-300 text-lg";
@@ -41,6 +55,15 @@ export default function Navbar() {
         >
           About
         </NavLink>
+
+        {user && (
+          <button
+            onClick={handleLogout}
+            className="text-red-600 px-3 py-1 rounded cursor-pointer hover:text-red-950 transition"
+          >
+            Log Out
+          </button>
+        )}
       </div>
     </nav>
   );
