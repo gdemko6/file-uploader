@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function LoginPage({ setUser }) {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -20,13 +20,13 @@ export default function LoginPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include", // Cookie needs to be sent to backend on requests
+        credentials: "include",
       });
-      const data = await res.json();
+
+      const data = await res.json(); // ✅ only once
 
       if (res.ok) {
-        const userData = await res.json();
-        setUser(userData.user);
+        setUser(data.user); // ✅ use it here
         navigate("/folders");
       } else {
         setErrorMsg(data.message || "Something went wrong");
@@ -76,7 +76,7 @@ export default function LoginPage() {
           {isLoading ? (
             <svg
               aria-hidden="true"
-              class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
