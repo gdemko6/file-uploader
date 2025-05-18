@@ -1,5 +1,5 @@
 import React from "react";
-import formatFilename from "../utils/formatFileName";
+import formatFilename from "../utils/formatText";
 
 export default function FileCard({ file, onDelete }) {
   return (

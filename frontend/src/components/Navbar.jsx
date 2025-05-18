@@ -29,7 +29,7 @@ export default function Navbar({ user, setUser }) {
       </NavLink>
 
       {/* Nav Links */}
-      <div className="space-x-2 text-sm sm:text-md lg:text-xl text-gray-700">
+      <div className="space-x-2 sm:space-x-4 text-sm sm:text-lg lg:text-xl text-gray-700">
         <NavLink
           to="/folders"
           // Add base style, if not active, do not apply active style
