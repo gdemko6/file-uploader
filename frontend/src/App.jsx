@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import FoldersPage from "./pages/FoldersPage";
 import FolderDetailPage from "./pages/FolderDetailPage";
 import FilesPage from "./pages/FilesPage";
+import AboutPage from "./pages/AboutPage";
 import Footer from "./components/Footer";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/folders" element={<FoldersPage />} />
             <Route path="/folders/:folderId" element={<FolderDetailPage />} />
             <Route path="/files" element={<FilesPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage setUser={setUser} />} />
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
