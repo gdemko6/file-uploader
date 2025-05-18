@@ -1,6 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar({ user, setUser }) {
+  const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       const res = await fetch("http://localhost:3000/logout", {
@@ -9,6 +11,7 @@ export default function Navbar({ user, setUser }) {
       });
       if (res.ok) {
         setUser(null);
+        navigate("/");
       }
     } catch (err) {
       console.error("Logout failed:", err);
