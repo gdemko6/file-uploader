@@ -11,6 +11,7 @@ const uploadRoutes = require("./routes/uploadRoutes");
 const folderRoutes = require("./routes/folderRoutes");
 const authRoutes = require("./routes/authRoutes");
 const fileRoutes = require("./routes/fileRoutes");
+const logoutRoutes = require("./routes/logoutRoutes");
 const app = express();
 const prisma = new PrismaClient();
 
@@ -44,6 +45,7 @@ app.use("/upload", uploadRoutes);
 app.use("/folders", folderRoutes);
 app.use("/me", authRoutes);
 app.use("/files", fileRoutes);
+app.use("/logout", logoutRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "API is running" });
