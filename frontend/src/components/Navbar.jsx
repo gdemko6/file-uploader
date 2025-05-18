@@ -19,18 +19,17 @@ export default function Navbar({ user, setUser }) {
   };
 
   const baseStyle = "hover:text-blue-500";
-  const activeStyle =
-    "underline underline-offset-6 decoration-blue-300 text-lg";
+  const activeStyle = "underline underline-offset-6 decoration-blue-300";
 
   return (
-    <nav className="flex items-center justify-between px-6 lg:px-16 py-4 bg-white shadow ">
+    <nav className="flex items-center justify-between px-6 mr-2 lg:px-16 py-4 bg-white shadow ">
       {/* Logo */}
       <NavLink to="/" className="text-2xl lg:text-3xl font-bold text-blue-600">
         FileKeep
       </NavLink>
 
       {/* Nav Links */}
-      <div className="space-x-6 font-medium lg:text-xl text-gray-700">
+      <div className="space-x-2 text-sm sm:text-md lg:text-xl text-gray-700">
         <NavLink
           to="/folders"
           // Add base style, if not active, do not apply active style
@@ -62,7 +61,7 @@ export default function Navbar({ user, setUser }) {
         {user && (
           <button
             onClick={handleLogout}
-            className="text-red-600 px-3 py-1 rounded cursor-pointer hover:text-red-950 transition"
+            className="text-red-600 pl-1 lg:px-2 rounded cursor-pointer hover:text-red-950 transition"
           >
             Log Out
           </button>
