@@ -9,6 +9,7 @@ export default function FolderDetailPage() {
   const [folder, setFolder] = useState({});
   const [files, setFiles] = useState([]);
   const [fileUpload, setFileUpload] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     // Retrieve all folders and files already stored in the database
@@ -33,6 +34,7 @@ export default function FolderDetailPage() {
         setFolder(data.folder);
         setFiles(data.folder.files || []);
       } catch (err) {
+        setErrorMsg("Upload failed. Please try again.");
         console.error("Error fetching folder:", err.message);
       }
     };
@@ -45,7 +47,16 @@ export default function FolderDetailPage() {
     e.preventDefault();
 
     // Dont attempt upload if no file has been selected
-    if (!fileUpload) return;
+    if (!fileUpload) {
+      setErrorMsg("Please select a file to upload.");
+      return;
+    }
+
+    // If no folder id is found dont try to upload file
+    if (!folderId) {
+      setErrorMsg("Missing folder ID. Try refreshing the page.");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("file-upload", fileUpload);
@@ -103,6 +114,11 @@ export default function FolderDetailPage() {
         <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl text-center font-bold text-gray-800 mb-6 mx-1 sm:mx-4 lg:mx-10">
           Folder: {folder.name}
         </h1>
+        {errorMsg && (
+          <div className="text-red-500 mb-4 font-medium text-center">
+            {errorMsg}
+          </div>
+        )}
         <form
           onSubmit={handleUpload}
           className="mb-8 flex items-center justify-center gap-4 mx-1 sm:mx-4 lg:mx-10"
@@ -116,7 +132,10 @@ export default function FolderDetailPage() {
             </span>
             <input
               type="file"
-              onChange={(e) => setFileUpload(e.target.files[0])}
+              onChange={(e) => {
+                setFileUpload(e.target.files[0]);
+                setErrorMsg(""); // Clear error on new input
+              }}
               className="hidden"
             />
           </label>

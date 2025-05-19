@@ -27,7 +27,7 @@ export default function SignupPage() {
       if (res.ok) {
         navigate("/login");
       } else {
-        setErrorMsg(data.message || "Something went wrong");
+        setErrorMsg(data.message || "Signup failed");
       }
     } catch (err) {
       setErrorMsg("Network error. Please try again.");
