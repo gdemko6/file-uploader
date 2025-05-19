@@ -22,7 +22,7 @@ export default function Navbar({ user, setUser }) {
   const activeStyle = "underline underline-offset-6 decoration-blue-300";
 
   return (
-    <nav className="flex items-center justify-between px-6 mr-2 lg:px-16 py-4 bg-white shadow ">
+    <nav className="flex items-center justify-between px-6 lg:px-8 py-4 bg-white shadow ">
       {/* Logo */}
       <NavLink to="/" className="text-2xl lg:text-3xl font-bold text-blue-600">
         FileKeep
