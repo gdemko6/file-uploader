@@ -10,6 +10,7 @@ import FolderDetailPage from "./pages/FolderDetailPage";
 import FilesPage from "./pages/FilesPage";
 import AboutPage from "./pages/AboutPage";
 import Footer from "./components/Footer";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -35,6 +36,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage setUser={setUser} />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer user={user} />
