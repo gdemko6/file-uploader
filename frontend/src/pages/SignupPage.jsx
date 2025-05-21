@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ export default function SignupPage() {
       const data = await res.json();
 
       if (res.ok) {
+        toast.success("Account created! Please log in.");
         navigate("/login");
       } else {
         setErrorMsg(data.message || "Signup failed");

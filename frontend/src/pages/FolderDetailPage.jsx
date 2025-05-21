@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import FileCard from "../components/FileCard";
+import { toast } from "react-hot-toast";
 
 export default function FolderDetailPage() {
   const { folderId } = useParams();
@@ -79,8 +80,10 @@ export default function FolderDetailPage() {
       // All files + the new file
       setFiles((prev) => [...prev, data.file]);
       setFileUpload(null);
+      toast.success("File uploaded!");
     } catch (err) {
       console.error("Error uploading file:", err.message);
+      toast.error("Upload failed. Please try again.");
     }
   };
 
@@ -102,8 +105,12 @@ export default function FolderDetailPage() {
       // Returns all files except the one that was deleted
       if (res.ok) {
         setFiles((prev) => prev.filter((f) => f.id !== fileId));
+        toast.success("File deleted.");
+      } else {
+        toast.error("Failed to delete file.");
       }
     } catch (err) {
+      toast.error("Failed to delete file.");
       console.error("Error deleting file:", err.message);
     }
   };

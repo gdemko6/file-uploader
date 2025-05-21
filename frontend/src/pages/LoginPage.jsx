@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export default function LoginPage({ setUser }) {
   const navigate = useNavigate();
@@ -23,10 +24,11 @@ export default function LoginPage({ setUser }) {
         credentials: "include",
       });
 
-      const data = await res.json(); // ✅ only once
+      const data = await res.json(); 
 
       if (res.ok) {
-        setUser(data.user); // ✅ use it here
+        setUser(data.user);
+        toast.success("Logged in successfully!");
         navigate("/folders");
       } else {
         setErrorMsg(data.message || "Something went wrong");
