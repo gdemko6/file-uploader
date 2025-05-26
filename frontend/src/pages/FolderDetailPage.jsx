@@ -13,6 +13,12 @@ export default function FolderDetailPage() {
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
+    if (folder.name) {
+      document.title = `FileKeep | ${folder.name}`;
+    }
+  }, [folder.name]);
+
+  useEffect(() => {
     // Retrieve all folders and files already stored in the database
     // for this user
     const fetchFolder = async () => {

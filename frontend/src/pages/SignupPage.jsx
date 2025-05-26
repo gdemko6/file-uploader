@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -10,6 +9,10 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    document.title = "FileKeep | Sign Up";
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

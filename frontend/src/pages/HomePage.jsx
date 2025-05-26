@@ -5,6 +5,10 @@ export default function HomePage() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    document.title = "FileKeep | Home";
+  }, []);
+
+  useEffect(() => {
     fetch("http://localhost:3000/me", {
       credentials: "include",
     })

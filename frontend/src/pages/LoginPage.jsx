@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
@@ -9,6 +9,10 @@ export default function LoginPage({ setUser }) {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    document.title = "FileKeep | Login";
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +28,7 @@ export default function LoginPage({ setUser }) {
         credentials: "include",
       });
 
-      const data = await res.json(); 
+      const data = await res.json();
 
       if (res.ok) {
         setUser(data.user);

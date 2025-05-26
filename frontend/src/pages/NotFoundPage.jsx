@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function NotFoundPage() {
+  useEffect(() => {
+    document.title = "FileKeep | 404 - Page Not Found";
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center h-[80vh] text-center px-4">
       <h1 className="text-5xl font-bold text-blue-600 mb-4">404</h1>

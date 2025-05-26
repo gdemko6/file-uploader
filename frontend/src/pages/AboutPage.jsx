@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
 export default function AboutPage() {
+  useEffect(() => {
+    document.title = "FileKeep | About";
+  }, []);
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-12 text-gray-800">
       <h1 className="text-4xl font-bold text-blue-600 mb-6">About FileKeep</h1>

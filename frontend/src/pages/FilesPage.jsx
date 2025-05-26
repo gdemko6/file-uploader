@@ -7,6 +7,10 @@ export default function FilesPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "FileKeep | Your Files";
+  }, []);
+
+  useEffect(() => {
     const fetchFiles = async () => {
       try {
         const res = await fetch("http://localhost:3000/files", {
@@ -21,7 +25,6 @@ export default function FilesPage() {
         }
 
         const data = await res.json();
-        console.log("Files:", data.files);
 
         setFiles(data.files || []);
       } catch (err) {

@@ -11,6 +11,10 @@ export default function FoldersPage() {
   const [newFolderName, setNewFolderName] = useState("");
 
   useEffect(() => {
+    document.title = "FileKeep | Your Folders";
+  }, []);
+
+  useEffect(() => {
     const fetchFolders = async () => {
       try {
         const res = await fetch("http://localhost:3000/folders", {
